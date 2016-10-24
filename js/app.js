@@ -17,24 +17,25 @@ var AppRouter = Backbone.Router.extend({
     appContainer.innerHTML = "<h1 class='bg-info'>" + countryName + "</h1>"
     var modelInstance = new countryModel(countryName);
     modelInstance.fetch().then(function(){
-      console.log(modelInstance);
-      
+      var theCapital = modelInstance.get('capital');
+      console.log(theCapital);
+
     })
   },
 
-  showHomePage: function(){
-    appContainer.innerHTML += "<input type='text'>"
-    appContainer.innerHTML += "<button class='btn btn-primary>Get Country<button>'"
-    document.querySelector('button').addEventListener('click', function(){
-      var inputElement = document.querySelector('#country-name');
-      window.location.hash = 'show-country/' + inputElement.value;
-      inputElement.value = '';
-    })
-  // console.log('routing to home');
-  // appContainer.innerHTML = "<h1> HOME </h1>";
-  // var modelInstance = new countryModel();
-  // modelInstance.fetch().then(function(serverResponse){
-  //   console.log(modelInstance);
-  // })
-},
+//   showHomePage: function(){
+//     appContainer.innerHTML += "<input type='text'>"
+//     appContainer.innerHTML += "<button class='btn btn-primary>Get Country<button>'"
+//     document.querySelector('button').addEventListener('click', function(){
+//       var inputElement = document.querySelector('#country-name');
+//       window.location.hash = 'show-country/' + inputElement.value;
+//       inputElement.value = '';
+//     })
+//   // console.log('routing to home');
+//   // appContainer.innerHTML = "<h1> HOME </h1>";
+//   // var modelInstance = new countryModel();
+//   // modelInstance.fetch().then(function(serverResponse){
+//   //   console.log(modelInstance);
+//   // })
+// },
 })
