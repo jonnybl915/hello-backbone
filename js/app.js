@@ -1,0 +1,40 @@
+var appContainer = document.querySelector("#app-container");
+
+var countryModel = Backbone.Model.extend({
+  url: "",
+  initialize: function(cVal){
+    this.url = "https://restcountries.eu/rest/v1/alpha/"+cVal
+  }
+})
+
+var AppRouter = Backbone.Router.extend({
+  routes: {
+    "show-country/:countryName": 'showCountry',
+    '': "showHomePage"
+  },
+
+  showCountry: function(countryName){
+    appContainer.innerHTML = "<h1 class='bg-info'>" + countryName + "</h1>"
+    var modelInstance = new countryModel(countryName);
+    modelInstance.fetch().then(function(){
+      console.log(modelInstance);
+      
+    })
+  },
+
+  showHomePage: function(){
+    appContainer.innerHTML += "<input type='text'>"
+    appContainer.innerHTML += "<button class='btn btn-primary>Get Country<button>'"
+    document.querySelector('button').addEventListener('click', function(){
+      var inputElement = document.querySelector('#country-name');
+      window.location.hash = 'show-country/' + inputElement.value;
+      inputElement.value = '';
+    })
+  // console.log('routing to home');
+  // appContainer.innerHTML = "<h1> HOME </h1>";
+  // var modelInstance = new countryModel();
+  // modelInstance.fetch().then(function(serverResponse){
+  //   console.log(modelInstance);
+  // })
+},
+})
