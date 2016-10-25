@@ -7,10 +7,25 @@ var countryModel = Backbone.Model.extend({
   }
 })
 
+var CountriesCollection = Backbone.Collection.extend({
+  url: '',
+  initialize: function(rVal){
+    this.url = 'https://restcountries.eu/rest/v1/region/' + rVal;
+  }
+})
+
 var AppRouter = Backbone.Router.extend({
   routes: {
     "show-country/:countryName": 'showCountry',
+    "show-region/:region" : "showCountriesByRegion",
     '': "showHomePage"
+  },
+
+  showCountriesByRegion : function(regionName){
+    var countriesCollInstance = new CountriesCollection(regionName);
+    countriesCollInstance.fetch().then(function(){
+      console.log(count);
+    })
   },
 
   showCountry: function(countryName){
