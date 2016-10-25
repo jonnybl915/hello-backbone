@@ -78,6 +78,10 @@ var HomeView = Backbone.View.extend({
   events : {
     'click .get-country-btn': 'putInputValInHash'
   },
+  putInputValInHash: function(evt){
+  var imputEL = document.querySelector('#country-name')
+  window.location.hash = 'show-country/' + imputEL;  
+  },
 
   builderHTMLTemplate: function(){
     var bigStr = "<h1> Search For a country </h1>";
