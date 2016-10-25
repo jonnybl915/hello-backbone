@@ -71,3 +71,24 @@ var AppRouter = Backbone.Router.extend({
 //     Backbone.history.start();
 //     //keeps a log so as to go to previous hash on backspace
 // })
+
+var HomeView = Backbone.View.extend({
+  el: '.content-area',
+
+  events : {
+    'click .get-country-btn': 'putInputValInHash'
+  },
+
+  builderHTMLTemplate: function(){
+    var bigStr = "<h1> Search For a country </h1>";
+    bigStr += "<input type='text' class='form-control' id='country-name'>";
+    bigStr += "<button class='btn btn-primary get-country-btn'> Get Country Info </button>"
+
+    return bigStr;
+  },
+
+  render: function(){
+    this.el.innerHTML = this.builderHTMLTemplate()
+    return this;
+  }
+})
