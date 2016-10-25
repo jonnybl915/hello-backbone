@@ -24,19 +24,28 @@ var AppRouter = Backbone.Router.extend({
   showCountriesByRegion : function(regionName){
     var countriesCollInstance = new CountriesCollection(regionName);
     countriesCollInstance.fetch().then(function(){
-      console.log(count);
+    console.log("server response: ", serverResponse);
+    console.log('Backbone Collection', countriesCollInstance);
+    countriesCollInstance.models.forEach(function(bbModl, i){
+      console.log(bbModl);
+      appContainer.innerHTML += "<p>" + bbModl.get('name') + '---' + '</p>';
+      appContainer.innerHTML += bbModl.get('borders').forEach(function(brdrStr){
+        appContainer.innerHTML += '<small>&nbsp' + borderStr + '</small>';
+      })
+      appContainer.innerHTML += "</hr>";
     })
-  },
+  });
+}
 
-  showCountry: function(countryName){
-    appContainer.innerHTML = "<h1 class='bg-info'>" + countryName + "</h1>"
-    var modelInstance = new countryModel(countryName);
-    modelInstance.fetch().then(function(){
-      var theCapital = modelInstance.get('capital');
-      console.log(theCapital);
-
-    })
-  },
+  // showCountry: function(countryName){
+  //   appContainer.innerHTML = "<h1 class='bg-info'>" + countryName + "</h1>";
+  //   var modelInstance = new countryModel(countryName);
+  //   modelInstance.fetch().then(function(){
+  //     var theCapital = modelInstance.get('capital');
+  //     console.log(theCapital);
+  //
+  //   })
+  // },
 
 //   showHomePage: function(){
 //     appContainer.innerHTML += "<input type='text'>"
@@ -53,4 +62,12 @@ var AppRouter = Backbone.Router.extend({
 //   //   console.log(modelInstance);
 //   // })
 // },
-})
+//})
+//
+// window.addEventListener('load', function() {
+//
+//     var appRouter = new AppRouter();
+//     console.log("Backbone ROUTING");
+//     Backbone.history.start();
+//     //keeps a log so as to go to previous hash on backspace
+// })
